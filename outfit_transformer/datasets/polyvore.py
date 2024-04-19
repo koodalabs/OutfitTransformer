@@ -3,6 +3,7 @@
 Author:
     Wonjun Oh, owj0421@naver.com
 """
+import json
 import os
 import math
 import wandb
@@ -24,6 +25,9 @@ from torch.utils.data import Dataset, DataLoader
 
 from outfit_transformer.utils.utils import *
 from outfit_transformer.datasets.processor import *
+from transformers import AutoTokenizer
+
+from outfit_transformer.datasets.processor import DeepFashionImageProcessor
 
 
 @dataclass

@@ -224,7 +224,7 @@ class OutfitTransformer(nn.Module):
             valid_fitb_dataloader: Optional[DataLoader] = None,
             valid_cir_dataloader: Optional[DataLoader] = None,
             scheduler: Optional[torch.optim.lr_scheduler.StepLR] = None,
-            device: Literal['cuda', 'cpu'] = 'cuda',
+            device: Literal['cuda', 'cpu'] = 'cpu',
             use_wandb: Optional[bool] = False,
             save_every: Optional[int] = 1
             ):
@@ -232,7 +232,7 @@ class OutfitTransformer(nn.Module):
         date = datetime.now().strftime('%Y-%m-%d')
         save_dir = os.path.join(save_dir, date)
 
-        device = torch.device(0) if device == 'cuda' else torch.device(1)
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.to(device)
 
         best_criterion = -np.inf

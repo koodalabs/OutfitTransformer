@@ -14,6 +14,7 @@ from torch.utils.data import DataLoader
 
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
+from transformers import AutoTokenizer
 
 from outfit_transformer.models.outfit_transformer import OutfitTransformer
 
@@ -39,7 +40,11 @@ if __name__ == '__main__':
     parser.add_argument('--save_every', help='', type=int, default=1)
     
     parser.add_argument('--save_dir', help='Full save directory', type=str, default='F:\Projects\OutfitTransformer\outfit_transformer\checkpoints')
-    parser.add_argument('--data_dir', help='Full dataset directory', type=str, default='F:\Projects\datasets\polyvore_outfits')
+    # parser.add_argument('--data_dir', help='Full dataset directory', type=str, default='F:\Projects\datasets\polyvore_outfits')
+
+    parser.add_argument('--data_dir', help='Full dataset directory', type=str, default='/Users/ag/Projects/Koodalabs/polyvore-dataset/')
+
+
     parser.add_argument('--num_workers', type=int, default=0)
 
     parser.add_argument('--scheduler_step_size', type=int, default=200)
@@ -123,7 +128,7 @@ if __name__ == '__main__':
             valid_dataloader = valid_dataloader,
             valid_cp_dataloader = valid_cp_dataloader,
             valid_fitb_dataloader = valid_fitb_dataloader,
-            device = 'cuda',
+            device = 'cpu',
             use_wandb = True if args.wandb_api_key else False,
             save_every = args.save_every,
             )
@@ -155,7 +160,7 @@ if __name__ == '__main__':
             train_dataloader = train_dataloader,
             valid_dataloader = valid_dataloader,
             valid_cir_dataloader = None,
-            device = 'cuda',
+            device = 'cpu',
             use_wandb = True if args.wandb_api_key else False,
             save_every = args.save_every,
             )
